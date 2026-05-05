@@ -880,7 +880,9 @@ setup_wpcli() {
 	fi
 
 	# Check if SAVEQUERIES is already defined and enabled in wp-config.php.
+	set +e
 	savequeries_value=$(wp "${WP_FLAGS[@]}" config get SAVEQUERIES 2>/dev/null)
+	set -e
 	if [ "$savequeries_value" = "true" ] || [ "$savequeries_value" = "1" ]; then
 		printf 'SAVEQUERIES:    already enabled in wp-config.php\n'
 	# Enable SAVEQUERIES so the plugin can record per-request DB time.
